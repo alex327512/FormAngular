@@ -15,12 +15,6 @@ export class EnrollmentService {
     
   }
   
-  // enroll(userData) {
-  //    this._http.post<any>(this._url, userData, {headers: this.myHeaders}).subscribe(data => {
-  //      this.data=data;
-  //      return this.data;
-  //      });
-    
-  // }
+ 
   
 }
