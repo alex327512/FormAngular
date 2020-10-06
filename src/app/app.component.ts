@@ -62,7 +62,6 @@ export class AppComponent implements OnInit {
   emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
   data: DialogData;
   dialogRef;
-  test: string = "test";
   constructor(
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
@@ -105,10 +104,9 @@ export class AppComponent implements OnInit {
    this._enrollmentService.enroll(this.userForm.value).subscribe(data => 
    {
      this.data = data;
-     console.log("testData: " + );
-      console.log("test: " + this.test);
-     this.dialogRef = this.dialog.open(DialogForm,{ data: {test: this.test} });
-      this.dialogRef.afterClosed().subscribe(() => {
+     this.dialogRef = this.dialog.open(DialogForm,{ data: this.data });
+
+this.dialogRef.afterClosed().subscribe(() => {
       this.userForm.reset();
       this.userForm.patchValue({
         gender: 'Male',
@@ -134,20 +132,14 @@ export class AppComponent implements OnInit {
   templateUrl: './popup.component.html',
 })
 export class DialogForm {
-  data;
+  data: DialogData;
   constructor(
     public dialogRef: MatDialogRef<DialogForm>,
     @Inject(MAT_DIALOG_DATA) public dataForm
   ) {}
   ngOnInit() {
-    this.data = this.dataForm.test;
-    console.log(this.dataForm);
-
-    console.log(this.data);
-    // this.dataForm.subscribe((dataForm) => {
-    //   this.data = dataForm.data;
-    //   console.log("data: " + this.data);
-    // });
+    this.dataForm = JSON.parse(this.dataForm.data);
+  
   }
 
   onSingUpClick(): void {
