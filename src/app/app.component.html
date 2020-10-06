@@ -1,0 +1,149 @@
+<div class="form-container">
+  <h3 class="form-head">Sing Up</h3>
+  <form
+    [formGroup]="userForm"
+    class="main-form"
+    #formDirective="ngForm"
+    (ngSubmit)="onSubmit(userForm, formDirective)"
+  >
+    <div class="form-inner">
+      <mat-form-field class="form-field">
+        <input matInput formControlName="firstName" placeholder="First name" />
+        <mat-error
+          *ngIf="
+            userForm.controls.firstName.touched &&
+            userForm.controls.firstName.invalid
+          "
+        >
+          <span *ngIf="userForm.controls.firstName.errors.required"
+            >This field is mandatory.</span
+          >
+          <span *ngIf="userForm.controls.firstName.errors.pattern"
+            >This field is invalid.</span
+          >
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput formControlName="lastName" placeholder="Last name" />
+        <mat-error
+          *ngIf="
+            userForm.controls.lastName.touched &&
+            userForm.controls.lastName.invalid
+          "
+        >
+          <span *ngIf="userForm.controls.lastName.errors.required"
+            >This field is mandatory.</span
+          >
+          <span *ngIf="userForm.controls.lastName.errors.pattern"
+            >This field is invalid.</span
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <div class="form-gender">
+        <mat-label class="form-lbl">Gender</mat-label>
+        <mat-radio-group formControlName="gender">
+          <mat-radio-button class="form-radio" value="Male"
+            >Male</mat-radio-button
+          >
+          <mat-radio-button class="form-radio" value="Female"
+            >Female</mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
+
+      <div class="form-counter">
+        <mat-label class="form-lbl">Age</mat-label>
+        <mat-form-field class="field-counter">
+          <input
+            matInput
+            formControlName="age"
+            type="number"
+            min="10"
+            max="100"
+          />
+          <mat-error
+            *ngIf="
+              userForm.controls.age.touched && userForm.controls.age.invalid
+            "
+          >
+            <span *ngIf="userForm.controls.age.errors.required"
+              >This field is mandatory.</span
+            >
+            <span *ngIf="userForm.controls.age.errors.pattern"
+              >This field is invalid.</span
+            >
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field class="form-field form-mail">
+        <input matInput formControlName="email" placeholder="Email" />
+        <mat-error
+          *ngIf="
+            userForm.controls.email.touched && userForm.controls.email.invalid
+          "
+        >
+          <span *ngIf="userForm.controls.email.errors.required"
+            >This field is mandatory.</span
+          >
+          <span *ngIf="userForm.controls.email.errors.pattern"
+            >This field is invalid.</span
+          >
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input
+          matInput
+          formControlName="password"
+          placeholder="Password"
+          type="password"
+        />
+        <mat-error
+          *ngIf="
+            userForm.controls.password.touched &&
+            userForm.controls.password.invalid
+          "
+        >
+          <span *ngIf="userForm.controls.password.errors.required"
+            >This field is mandatory.</span
+          >
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input
+          matInput
+          formControlName="confirmPassword"
+          placeholder="Confirm Password"
+          type="password"
+          [errorStateMatcher]="matcher"
+        />
+        <mat-error
+          *ngIf="
+            userForm.controls.confirmPassword.touched &&
+            userForm.controls.confirmPassword.invalid
+          "
+        >
+          <span *ngIf="userForm.controls.confirmPassword.errors.required"
+            >This field is mandatory.</span
+          >
+          <span></span>
+        </mat-error>
+
+        <mat-error *ngIf="userForm.hasError('notSame')"
+          >Passwords do not match.
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <button
+      mat-flat-button
+      class="form-btn"
+      color="primary"
+      type="submit"
+      [disabled]="userForm.invalid"
+      (click)="openDialog()"
+    >
+      Sing Up
+    </button>
+  </form>
+</div>

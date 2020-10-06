@@ -1,0 +1,17 @@
+<div class="container">
+  <h2 mat-dialog-title>Your registration was successful!</h2>
+  <div class="body" >
+    <p> Please, check your data below:</p>
+      <mat-list role="list">
+      <mat-list-item role="listitem">{{data?.firstName}}</mat-list-item>
+      <mat-list-item role="listitem">Last Name: {{dataForm?.lastName}}</mat-list-item>
+      <mat-list-item role="listitem">Gender: {{dataForm?.gender}}</mat-list-item>
+      <mat-list-item role="listitem">Age: {{dataForm?.age}}</mat-list-item>
+      <mat-list-item role="listitem">Email: {{dataForm?.email}}</mat-list-item>
+      <mat-list-item role="listitem">Password: {{dataForm?.password}}</mat-list-item>
+    </mat-list>
+
+  </div>
+  <button class="mat-flat-button mat-primary" (click)="onSingUpClick()">Sign up
+    again</button>
+</div>
